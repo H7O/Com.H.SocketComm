@@ -76,6 +76,7 @@ namespace Com.H.SocketComm
                     this.IsConnected = true;
                     this.UnderlyingSocket = c;
                     this.Server = server;
+                    this.encoding = server.Encoding ?? this.encoding;
                     this.Stream = new NetworkStream(this.UnderlyingSocket);
                     this.Writer = new StreamWriter(this.Stream, this.Encoding);
                     this.Reader = new StreamReader(this.Stream, this.Encoding);

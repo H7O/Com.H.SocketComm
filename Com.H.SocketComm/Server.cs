@@ -17,14 +17,29 @@ namespace Com.H.SocketComm
 
     public class Server : IDisposable
     {
+        #region public
+        /// <summary>
+        /// You can use this cancellation token source to hook it up to other business logic you might have 
+        /// giving you universal control over threads cancellation across your solution
+        /// </summary>
         public CancellationTokenSource Cts { get; private set; }
+        /// <summary>
+        /// List of all active (non-disposed) clients. 
+        /// Clients that are disconnected and not referenced in your application gets removed automatically from this list.
+        /// </summary>
         public ConcurrentDictionary<Guid, ServerClient> Clients { get; private set; } = new ConcurrentDictionary<Guid, ServerClient>();
+
+        public Encoding Encoding { get; set; } = Encoding.UTF8;
+        #endregion
+
+        #region private
         private TcpListener L { get; set; }
         
         private bool IsRunning { get; set; }
         private readonly object lockObj = new object();
         private IPEndPoint Ep { get; set; }
 
+        #endregion
         /// <summary>
         /// Instantiate the Server class.
         /// </summary>
