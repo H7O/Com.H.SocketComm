@@ -18,7 +18,7 @@ namespace Com.H.SocketComm.Json
         /// <param name="client">The SocketCom API client object</param>
         /// <param name="data">The data object to be send</param>
         public static void WriteJson<T>(this IClient client, T data) 
-            => client.Write(JsonSerializer.Serialize<T>(data));
+            => client?.Write(JsonSerializer.Serialize<T>(data));
 
         /// <summary>
         /// Retrieves then deserializes a JSON object up from the stream
@@ -27,7 +27,7 @@ namespace Com.H.SocketComm.Json
         /// <param name="client"></param>
         /// <returns>Deserialized object</returns>
         public static T ReadJson<T>(this IClient client) 
-            => JsonSerializer.Deserialize<T>(client.Read());
+            => JsonSerializer.Deserialize<T>(client?.Read());
 
     }
 }
